@@ -1,6 +1,7 @@
 package com.example.fragmentexample
 
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,12 @@ import com.example.fragmentinteraction.R
  */
 class OneFragment : Fragment() {
 
+    interface OnMessageClickListener{
+        fun onMessageClick()
+    }
+
+    var messageListener: OnMessageClickListener? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,13 +33,24 @@ class OneFragment : Fragment() {
 
         val showActivityMessage = view.findViewById<Button>(R.id.show_activity_message)
         showActivityMessage.setOnClickListener {
-            activity?.let{
-                (it as MainActivity).showActivityMessage()
-            }
+            messageListener?.onMessageClick()
         }
         return view
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        messageListener = context as? OnMessageClickListener
+
+        if(messageListener == null){
+            throw ClassCastException("$context must implement OnArticleSelectedListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        messageListener = null
+    }
 
     fun showFragmentMessage(){
         activity?.let {

@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.fragmentexample.OneFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OneFragment.OnMessageClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showActivityMessage(){
+
+    override fun onMessageClick() {
         Toast.makeText(this, "This message is from Activity", Toast.LENGTH_SHORT).show()
     }
 }
