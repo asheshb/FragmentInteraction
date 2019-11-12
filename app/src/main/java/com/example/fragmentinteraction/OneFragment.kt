@@ -33,7 +33,11 @@ class OneFragment : Fragment() {
 
         val showActivityMessage = view.findViewById<Button>(R.id.show_activity_message)
         showActivityMessage.setOnClickListener {
-            messageListener?.onMessageClick()
+            activity?.let{
+                (it as MainActivity).showActivityMessage()
+            }
+
+            //messageListener?.onMessageClick()
         }
         return view
     }

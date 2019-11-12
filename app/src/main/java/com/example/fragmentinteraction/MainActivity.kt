@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity(), OneFragment.OnMessageClickListener {
 
 
     override fun onMessageClick() {
+        showActivityMessage()
+    }
+
+    fun showActivityMessage(){
         Toast.makeText(this, "This message is from Activity", Toast.LENGTH_SHORT).show()
     }
 }
